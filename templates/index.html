@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PATHORA turns a travel idea into a practical itinerary, with specialist research and human review.">
+  <meta name="theme-color" content="#f3eee4">
+  <title>PATHORA — Go further, with a plan.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css?v=4">
+</head>
+<body>
+  <a class="skip-link" href="#planner">Skip to trip planner</a>
+  <div class="site-shell" aria-hidden="true"><div class="grain"></div><div class="sun-disc"></div><div class="route-line route-line-a"></div><div class="route-line route-line-b"></div><span class="map-mark mark-a">+</span><span class="map-mark mark-b">+</span><span class="map-mark mark-c">+</span></div>
+  <header class="topbar"><a class="brand" href="/" aria-label="PATHORA home"><span class="brand-mark">P</span><span>PATHORA</span></a><div class="topbar-note"><span class="live-dot"></span>Supervisor-led travel intelligence</div></header>
+  <main class="app-container">
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="eyebrow"><span>✦</span> Intelligent travel planning, thoughtfully assembled</div>
+      <h1 id="hero-title">Go further,<br><em>with a plan.</em></h1>
+      <p class="hero-copy">Tell PATHORA where you want to go, how long you have and what matters to you. Your request is checked, routed to the right specialists, then held for your review.</p>
+      <div class="hero-meta"><span>GUARDRAILS</span><i></i><span>SUPERVISOR</span><i></i><span>LIVE TOOLS</span><i></i><span>HUMAN REVIEW</span></div>
+    </section>
+    <section id="planner" class="planner-card reveal" aria-labelledby="planner-title">
+      <div class="card-intro"><div><p class="section-kicker">01 / Shape your journey</p><h2 id="planner-title">Where will the road take you?</h2><p class="supporting-copy">Start with a natural request. PATHORA will choose the travel specialists needed to build your route.</p></div><div class="status-pill" role="status"><span class="status-dot"></span>PATHORA MCP online</div></div>
+      <div class="prompt-layout"><div class="input-wrap"><label for="userInput">Your travel brief</label><textarea id="userInput" maxlength="1200" aria-describedby="inputHint" placeholder="Plan 7 days in Japan from Chennai for two people, including flights, characterful stays and a balanced sightseeing route under ₹2 lakh..."></textarea><div class="input-footer"><span id="inputHint">Destination · duration · origin · budget · preferences</span><span id="charCount" aria-live="polite">0 / 1200</span></div></div><button id="sendBtn" class="primary-action" type="button" onclick="sendMessage()"><span id="btnText">Build my route <b>↗</b></span><span id="btnLoader" class="loader hidden" aria-label="Building your route"></span></button></div>
+      <div class="prompt-row" aria-label="Example travel requests"><span class="prompt-label">Try a direction</span><button type="button" onclick="setPrompt('Plan a 7 day Japan trip from Chennai for two people with flights, hotels and sightseeing under ₹2 lakh.')">Japan, considered</button><button type="button" onclick="setPrompt('Plan a 5 day Dubai trip from Chennai with flights, a well-located hotel and a relaxed sightseeing plan.')">Dubai, easy pace</button><button type="button" onclick="setPrompt('Plan a 7 day Thailand trip from Chennai with comfortable stays, local food and a balanced sightseeing route.')">Thailand, local</button></div>
+    </section>
+    <section id="workflowSection" class="workflow-section reveal" aria-labelledby="workflow-title"><div class="workflow-header"><div><p class="section-kicker">02 / Agent workspace</p><h2 id="workflow-title">Your route, under supervision.</h2></div><span id="guardrailBadge" class="guardrail-badge">Ready to screen</span></div><p id="supervisorReasoning" class="supervisor-reasoning">Every request first passes the travel guardrail. The supervisor then selects only the specialists needed for your journey.</p><div class="workflow-label">Tools selected for this request</div><p id="toolExecutionStatus" class="tool-execution-status" role="status">Waiting for a travel brief.</p><div id="agentChips" class="agent-chips" aria-live="polite"><span class="agent-chip">Flight specialist · AviationStack airport &amp; airline data</span><span class="agent-chip">Stay specialist · Tavily hotel web research</span><span class="agent-chip">Weather specialist · Weather and forecast MCP services</span><span class="agent-chip">Budget specialist · Budget analysis</span><span class="agent-chip">Itinerary specialist · Travel-plan synthesis</span></div><p class="tool-note"><strong>Human-in-the-loop:</strong> PATHORA pauses after creating a draft. You approve it or request revisions before a final itinerary is generated.</p></section>
+    <section id="resultSection" class="result-section hidden reveal" aria-labelledby="resultTitle"><div class="result-header"><div><p class="section-kicker">03 / Your route</p><h2 id="resultTitle">A journey worth looking forward to.</h2><p id="threadInfo">PATHORA journey · —</p></div><div class="result-actions"><button class="secondary-btn copy-btn" type="button" onclick="copyResult()">Copy plan</button><button class="download-btn" type="button" onclick="downloadPDF()">Save as PDF <span>↓</span></button></div></div><div id="pdfContent" class="pdf-content"><div class="pdf-heading"><span class="brand-mini">PATHORA</span><h3 class="pdf-title">Your journey, mapped with intention.</h3></div><div id="resultBox" class="result-box"></div></div></section>
+    <section id="approvalSection" class="approval-section hidden reveal" aria-labelledby="approval-title"><div class="approval-icon" aria-hidden="true">✓</div><div class="approval-content"><p class="section-kicker">04 / Human-in-the-loop</p><h2 id="approval-title">Review the draft itinerary.</h2><p id="approvalRequest">Approve the draft or provide feedback before the final plan is created.</p><textarea id="approvalFeedback" class="feedback-input" placeholder="Revision feedback — for example, reduce hotel spend and add a free day..." disabled></textarea><div class="approval-actions"><button id="approveBtn" class="approve-btn" type="button" onclick="submitApproval(true)" disabled>Approve &amp; create final</button><button id="reviseBtn" class="revise-btn" type="button" onclick="submitApproval(false)" disabled>Revise with feedback</button></div></div></section>
+    <section id="errorBox" class="error-box hidden" role="alert" aria-live="assertive"></section>
+  </main>
+  <footer><div class="footer-brand">PATHORA</div><p>Thoughtful routes. Useful details. Better journeys.</p><span>Guardrailed by design · reviewed by you</span></footer>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script><script src="/static/script.js?v=6" defer></script>
+</body>
+</html>
